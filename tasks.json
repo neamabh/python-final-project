@@ -1,0 +1,20 @@
+[
+    {
+        "id": 2,
+        "title": "My first task",
+        "user_id": 1,
+        "due_date": "2026-11-10",
+        "priority": 2,
+        "done": false,
+        "notes": "Testing my API"
+    },
+    {
+        "id": 3,
+        "title": "Final project test",
+        "user_id": 1,
+        "due_date": "2026-11-15",
+        "priority": 2,
+        "done": false,
+        "notes": "Testing task creation"
+    }
+]
