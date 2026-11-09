@@ -1,47 +1,49 @@
 # Task Management API
 
-A Python-based Task Management API built with FastAPI.  
-The project combines task management, data analysis, and AI-powered insights using Google's Gemini API.
+A Python-based REST API built with **FastAPI**, combining task management, data analysis, and AI-powered insights using **Google Gemini**.
+
+The project demonstrates backend development, data processing, API security, statistical analysis, and AI integration in one application.
 
 ## Features
 
-### 1. Task Management (CRUD)
-- Create new tasks.
-- Retrieve all tasks or a specific task.
-- Update existing tasks.
-- Delete tasks.
-- Identify overdue tasks and calculate days late.
+### Task Management
+- Create, retrieve, update, and delete tasks (CRUD).
+- Retrieve a specific task by ID.
+- Track overdue tasks and calculate days late.
 - Validate task titles and priority levels.
+- Store task information in a JSON file.
 
-### 2. Data Analysis
-- Fetch users and tasks from JSONPlaceholder.
-- Merge and process data using Pandas.
+### Data Analysis
+- Fetch sample users and tasks from JSONPlaceholder.
+- Merge and process datasets using Pandas.
 - Calculate task completion percentages.
-- Generate performance statistics using NumPy.
+- Generate statistical summaries using NumPy.
 - Identify users performing below average.
-- Create a city-based pivot table.
+- Analyze task completion by city using pivot tables.
+- Support sorting and pagination.
 
-### 3. AI Assistant
-- AI-powered question answering using Google Gemini.
-- Dynamic system prompt based on project data.
-- Conversation history using conversation IDs.
-- Mock responses when the Gemini API key is unavailable.
+### AI Assistant
+- Integration with Google's Gemini API.
+- Answer questions using project data and analytical results.
+- Generate dynamic system prompts based on project statistics.
+- Maintain conversation history using conversation IDs.
+- Provide mock responses when the Gemini API key is unavailable.
 
-### 4. Security and Infrastructure
-- API Key authentication.
-- Request validation and error handling.
+### Security and Infrastructure
+- API Key authentication using the `X-API-Key` header.
+- Input validation and custom exception handling.
 - Pagination and sorting.
 - CORS configuration.
 - Request logging and processing-time measurement.
-- HTTP status codes for error handling.
+- Appropriate HTTP status codes and error handling.
 
-### 5. AI Logging
-- Log conversation IDs and timestamps.
+### AI Usage Logging
+- Record conversation IDs and timestamps.
 - Track prompt and response lengths.
 - Track successful, failed, and mock requests.
-- Calculate AI usage statistics.
+- Generate AI usage statistics.
 
-## Technologies
+## Technologies Used
 
 - Python
 - FastAPI
@@ -51,6 +53,7 @@ The project combines task management, data analysis, and AI-powered insights usi
 - Requests
 - Google Gemini API
 - Uvicorn
+- Python-dotenv
 
 ## Project Structure
 
@@ -65,33 +68,36 @@ python-final-project/
 │
 ├── tasks.json
 ├── requirements.txt
-├── .env
 ├── .gitignore
 └── README.md
 ```
 
-## Installation
+**Note:** The `.env` file is created locally and is intentionally excluded from GitHub.
 
-Clone the repository:
+## Installation and Setup
+
+### 1. Clone the Repository
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/neamabh/python-final-project.git
 cd python-final-project
 ```
 
-Create a virtual environment:
+### 2. Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate it on Windows:
+### 3. Activate the Virtual Environment
+
+For Windows:
 
 ```bash
-venv\Scripts\activate
+.\venv\Scripts\activate
 ```
 
-Install dependencies:
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -99,57 +105,89 @@ pip install -r requirements.txt
 
 ## Environment Variables
 
-Create a `.env` file in the project root:
+Create a `.env` file in the root directory of the project:
 
 ```env
-APP_API_KEY=your_api_key
+APP_API_KEY=your_app_api_key
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
-Never commit your `.env` file or expose API keys publicly.
+Replace the placeholder values with your own API keys.
 
-## Run the Application
+**Security:** Never upload your `.env` file or expose API keys in a public repository.
+
+## Running the Application
+
+Start the FastAPI server:
 
 ```bash
 uvicorn main:app --reload
 ```
 
-The API will be available at:
+The application will be available at:
 
-`http://127.0.0.1:8000`
+http://127.0.0.1:8000
 
-Interactive API documentation:
+### Interactive API Documentation
 
-`http://127.0.0.1:8000/docs`
+FastAPI automatically generates Swagger documentation.
 
-## Main API Endpoints
+Open the following URL in your browser:
+
+http://127.0.0.1:8000/docs
+
+Use Swagger UI to explore and test the API endpoints.
+
+## API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| GET | `/` | API status |
-| GET | `/tasks` | Get all tasks |
-| GET | `/tasks/{task_id}` | Get a specific task |
-| POST | `/tasks` | Create a task |
-| PUT | `/tasks/{task_id}` | Update a task |
+| GET | `/` | Check API status |
+| GET | `/tasks` | Retrieve all tasks |
+| GET | `/tasks/{task_id}` | Retrieve a specific task |
+| POST | `/tasks` | Create a new task |
+| PUT | `/tasks/{task_id}` | Update an existing task |
 | DELETE | `/tasks/{task_id}` | Delete a task |
-| GET | `/tasks/overdue` | Get overdue tasks |
+| GET | `/tasks/overdue` | Retrieve overdue tasks |
 | GET | `/stats/users` | User performance statistics |
 | GET | `/stats/summary` | Overall performance summary |
-| GET | `/stats/cities` | City completion statistics |
-| GET | `/stats/low-performers` | Below-average performers |
+| GET | `/stats/cities` | City-based completion statistics |
+| GET | `/stats/low-performers` | Identify below-average performers |
 | POST | `/ai/ask` | Ask the AI assistant |
-| GET | `/ai/logs/stats` | AI usage statistics |
+| GET | `/ai/logs/stats` | Retrieve AI usage statistics |
+
+**Authentication:** Protected endpoints require an API key in the `X-API-Key` request header.
 
 ## Data Source
 
-The project uses the JSONPlaceholder API to retrieve sample users and tasks.
+The application uses [JSONPlaceholder](https://jsonplaceholder.typicode.com/) as an external source for sample user and task data.
+
+The retrieved data is processed and analyzed to generate performance insights and statistics.
 
 ## AI Integration
 
-The project integrates Google's Gemini API to provide intelligent answers based on task data and analytical results.
+Google Gemini powers the AI assistant.
 
-Conversation history is maintained using conversation IDs, allowing the assistant to retain context across messages.
+The assistant receives project statistics and task information through a dynamically generated system prompt.
+
+Conversation history is maintained using conversation IDs, allowing the assistant to retain context across multiple requests.
+
+A mock response mechanism is also available when the Gemini API key is not configured.
+
+## Error Handling
+
+The API handles common errors using appropriate HTTP status codes:
+
+- `400` – Invalid input.
+- `401` – Invalid or missing API key.
+- `404` – Resource not found.
+- `422` – Request validation error.
+- `503` – External data source unavailable.
 
 ## Author
 
-Developed as a Python Final Project.
+**Neama Ben Hamo**
+
+Python Final Project
+
+Task Management API with Data Analytics and AI Integration.
